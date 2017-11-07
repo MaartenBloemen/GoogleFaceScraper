@@ -28,9 +28,15 @@ Follow the steps below to install and run the project:
 	* `--cluster_threshold` - **float** - The minimum ecleudian distance for an image to be part of a cluster (default: 1.0).
 	* `--safe_mode` - **String** - Choices ['on', 'off], this determines whether the Google search should include explicit images or not (default: on).
 	* `--gpu_memory_fraction` - **float** - A number bewteen 0 and 1 that determines that max percentage of GPU memory that can be used (default: 1.0).
+	
+You can find a pretrained model (.pb) on the [Facenet](https://github.com/davidsandberg/facenet) repository as well as instructions on how to train your own model.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/MaartenBloemen/GoogleFaceScraper/blob/master/LICENSE.md)  file for details.
 
 ## Authors
 * [Maarten Bloemen](https://github.com/MaartenBloemen) 
+
+## Acknowledgments
+* [Facenet](https://github.com/davidsandberg/facenet) - MIT License
+* [MTCNN](https://github.com/kpzhang93/MTCNN_face_detection_alignment) - MIT License
