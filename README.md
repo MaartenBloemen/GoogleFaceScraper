@@ -1,5 +1,5 @@
 # GoogleFaceScraper
-A Google image scraper to collect a labeled face dataset. You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
+A Google image scraper that to collect a clean labeled dataset. You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
 
 **Important:** if you use your own text file with names then make sure the names are formatted as **name_lastname**.
 
