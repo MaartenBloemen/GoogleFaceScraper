@@ -53,4 +53,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 * [MTCNN](https://github.com/kpzhang93/MTCNN_face_detection_alignment) - MIT License
 
 ## Disclaimer
-This project is meant as a proof of concept. Use datasets gathered this way ONLY for research purposes as this is very grey area.
+This project is meant as a proof of concept. Use datasets gathered this way ONLY for research purposes.
