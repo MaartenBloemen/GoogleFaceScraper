@@ -1,7 +1,7 @@
 # GoogleFaceScraper
 A Google image scraper that to collect a clean labeled dataset. You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
 
-In the output folder a text file containing links to all scraped images with the date they were scraped.
+In the output folder a text file will be created, containing links to all scraped images and the date they were scraped.
 
 For each person a sub folder `name_lastname` will be made in the chosen output folder. The faces beloning to the person will be saved in the subfolder as:
 ```
