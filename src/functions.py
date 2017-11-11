@@ -23,6 +23,7 @@
 import urllib2
 import cv2
 import json
+import time
 import numpy as np
 from bs4 import BeautifulSoup
 
@@ -60,15 +61,17 @@ class GoogleFunctions:
 
         return images_links
 
-    def get_images(self, query, safe_mode):
-        image_links = self._get_image_links(query, safe_mode)
-        images = []
-        for i, (img, Type) in enumerate(image_links):
-            image = self._get_image(img)
-            if image is not None:
-                images.append(image)
+    def get_images(self, path, query, safe_mode):
+        with open(path, 'a') as image_sources:
+            image_links = self._get_image_links(query, safe_mode)
+            images = []
+            for i, (img, Type) in enumerate(image_links):
+                image_sources.write(img + '\t' + time.strftime("%d/%m/%Y") + '\n')
+                image = self._get_image(img)
+                if image is not None:
+                    images.append(image)
 
-        return images
+            return images
 
 
 class ImdbFunctions:
