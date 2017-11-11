@@ -1,5 +1,5 @@
 # GoogleFaceScraper
-A Google image scraper that to collect a clean labeled dataset. You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
+A Google image scraper to collect a cleaned and labeled face dataset to train face recognition models. You will need a pretrained model for this to work. You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
 
 In the output folder a text file will be created, containing links to all scraped images and the date they were scraped.
 
