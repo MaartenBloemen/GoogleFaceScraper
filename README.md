@@ -1,5 +1,6 @@
 # GoogleFaceScraper
-A Google image scraper to collect a cleaned and labeled face dataset to train face recognition models. You will need a pretrained model for this to work. You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
+A Google image scraper to collect a cleaned and labeled face dataset to train face recognition models. You will need a pretrained model for this project to work.
+You can either use a text file containing names of use the integrated IMDB name scraper to make the script fully automatic.
 
 In the output folder a text file will be created, containing links to all scraped images and the date they were scraped.
 
@@ -38,7 +39,7 @@ Follow the steps below to install and run the project:
 	* `--min_cluster_size` - **int** - The minimum amount of pictures required for a single cluster (default: 10), note only the largest cluster will be safed.
 	* `--cluster_threshold` - **float** - The minimum ecleudian distance for an image to be part of a cluster (default: 1.0).
 	* `--safe_mode` - **String** - Choices ['on', 'off], this determines whether the Google search should include explicit images or not (default: on).
-	* `--gpu_memory_fraction` - **float** - A number bewteen 0 and 1 that determines that max percentage of GPU memory that can be used (default: 1.0).
+	* `--gpu_memory_fraction` - **float** - A number bewteen 0 and 1 that determines the max percentage of GPU memory that can be used (default: 1.0).
 	
 You can find a pretrained model (.pb) on the [Facenet](https://github.com/davidsandberg/facenet) repository as well as instructions on how to train your own model.
 
