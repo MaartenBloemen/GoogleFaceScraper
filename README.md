@@ -54,4 +54,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 * [MTCNN](https://github.com/kpzhang93/MTCNN_face_detection_alignment) - MIT License
 
 ## Disclaimer
-This project is meant as a proof of concept. Use datasets gathered this way ONLY for research purposes.
+This project is meant as a proof of concept as this violates the ToS of Google. To lower the chance of a ban by Google, it's possible to use a VPN.
+
+Do not use datasets gathered this way for commercial use, only for research purposes.
+
+Again this project is purely as a Proof-of-Concept to see what is technical possible.
+
+## TODO
+[] Add proxy handler 
