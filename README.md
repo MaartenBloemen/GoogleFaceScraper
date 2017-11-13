@@ -61,4 +61,4 @@ Do not use datasets gathered this way for commercial use, only for research purp
 Again this project is purely as a Proof-of-Concept to see what is technical possible.
 
 ## TODO
-[] Add proxy handler 
+[ ] Add proxy handler 
