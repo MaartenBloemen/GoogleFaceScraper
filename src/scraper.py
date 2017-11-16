@@ -94,23 +94,23 @@ def main(args, pnet, rnet, onet):
         _ = tf.import_graph_def(graph_def, name='')
 
     with tf.Session() as sess:
-        path = os.path.join(args.out_dir, 'sources.txt')
+        images_file_path = os.path.join(args.out_dir, 'sources.txt')
 
         # Create a new file containing the sources of the images
-        with open(path, 'w+') as source_file:
+        with open(images_file_path, 'w+') as source_file:
             source_file.write('Url\tDate\n')
 
         # Read names from txt file else scrape IMDB for names
         if '.txt' in args.name_source:
             names = []
-            with open(args.names) as file:
+            with open(args.name_source) as file:
                 for name in file.readlines():
                     names.append(name.strip())
         else:
             names = imdb_name_scraper.get_celebrity_names(args.limit)
 
         for name in names:
-            images = google_scraper.get_images(path, name, args.safe_mode)
+            images = google_scraper.get_images(images_file_path, name, args.safe_mode)
 
             # Check if the image list is not empty
             if images is not None:
