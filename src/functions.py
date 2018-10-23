@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import urllib2
+import requests
 import cv2
 import json
 import time
@@ -33,12 +33,12 @@ class GoogleFunctions:
         pass
 
     def _get_soup(self, url, header):
-        return BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=header)), 'html.parser')
+        return BeautifulSoup(requests.get(url, headers=header).content, 'html.parser')
 
     def _get_image(self, url):
         try:
-            req = urllib2.urlopen(url)
-            arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+            req = requests.get(url).content
+            arr = np.asarray(bytearray(req), dtype=np.uint8)
             img = cv2.imdecode(arr, -1)
             return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         except:
@@ -46,8 +46,8 @@ class GoogleFunctions:
 
     def _get_image_links(self, query, safe_mode):
         query = query.strip().split('_')
-        query = '+'.join(query)
-        url = 'https://www.google.com/search?q=' + query + '&source=lnms&tbm=isch&safe=' + safe_mode
+        query = '%20'.join(query)
+        url = 'https://www.google.com/search?q={}&source=lnms&tbm=isch&safe={}'.format(query, safe_mode)
         print(url)
         header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
@@ -75,6 +75,8 @@ class GoogleFunctions:
 
 
 class ImdbFunctions:
+    CELEBS_PER_PAGE = 50
+
     def __init__(self):
         pass
 
@@ -82,13 +84,13 @@ class ImdbFunctions:
         return all(ord(char) < 128 for char in name)
 
     def _get_soup(self, url, header):
-        return BeautifulSoup(urllib2.urlopen(urllib2.Request(url, headers=header)), 'html.parser')
+        return BeautifulSoup(requests.get(url, headers=header).content, 'html.parser')
 
     def get_celebrity_names(self, limit):
         celebrity_list = []
         for i in range(limit):
-            start = 1 + (i * 50)
-            url = 'http://www.imdb.com/search/name?gender=male,female&start=' + str(start) + '&ref_=rlm'
+            start = 1 + (i * self.CELEBS_PER_PAGE)
+            url = 'http://www.imdb.com/search/name?gender=male,female&start={}&ref_=rlm'.format(start)
             header = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
             }
@@ -98,7 +100,7 @@ class ImdbFunctions:
             if 'Error' in check:
                 break
 
-            names = soup.findAll('td', {'class': 'name'})
+            names = soup.findAll('h3', {'class': 'lister-item-header'})
             for name in names:
                 name = name.a.string.split()
                 name = '_'.join(name)
