@@ -101,18 +101,19 @@ def main(args, pnet, rnet, onet):
     imdb_name_scraper = ImdbFunctions()
     google_scraper = GoogleFunctions()
 
-    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=(args.gpu_memory_fraction * 0.7))
+    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=(round(args.gpu_memory_fraction * 0.7, 2)))
+    print(gpu_options)
 
     with tf.Graph().as_default():
         with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options,
                                               log_device_placement=False)) as sess:
             # Open the facenet model
             facenet.load_model(args.model)
-            images_file_path = os.path.join(args.out_dir, 'sources.txt')
+            images_file_path = os.path.join(args.out_dir, 'sources.csv')
 
             # Create a new file containing the sources of the images
             with open(images_file_path, 'w+') as source_file:
-                source_file.write('Url\tDate\n')
+                source_file.write('Date,URL\n')
 
             # Read names from txt file else scrape IMDB for names
             if '.txt' in args.name_source:
@@ -144,7 +145,7 @@ def main(args, pnet, rnet, onet):
                         # Get number of faces in the list after alignment
                         nrof_images = len(images_aligned_model)
 
-                        print('Number of faces inf images: {}'.format(nrof_images))
+                        print('Number of faces in images: {}'.format(nrof_images))
 
                         # Create empty distance matrix
                         matrix = np.zeros((nrof_images, nrof_images))
@@ -231,6 +232,6 @@ if __name__ == '__main__':
     # pnet = proposal network
     # rnet = refinement network
     # onet = output network
-    pnet, rnet, onet = create_network_face_detection(args.gpu_memory_fraction * 0.3)
+    pnet, rnet, onet = create_network_face_detection(round(args.gpu_memory_fraction * 0.3, 2))
     # Main entry point into the application, passing the args and the layers for the face detection
     main(args, pnet, rnet, onet)

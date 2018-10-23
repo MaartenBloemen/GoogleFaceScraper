@@ -66,7 +66,7 @@ class GoogleFunctions:
             image_links = self._get_image_links(query, safe_mode)
             images = []
             for i, (img, Type) in enumerate(image_links):
-                image_sources.write(img + '\t' + time.strftime("%d/%m/%Y") + '\n')
+                image_sources.write('{},{}\n'.format(time.strftime("%d/%m/%Y"), img))
                 image = self._get_image(img)
                 if image is not None:
                     images.append(image)
