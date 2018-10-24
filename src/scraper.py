@@ -147,13 +147,8 @@ def main(args, pnet, rnet, onet):
 
                         print('Number of faces in images: {}'.format(nrof_images))
 
-                        # Create empty distance matrix
-                        matrix = np.zeros((nrof_images, nrof_images))
-                        for i in range(nrof_images):
-                            for j in range(nrof_images):
-                                # Calc distance and fill the matrix
-                                dist = np.sqrt(np.sum(np.square(np.subtract(emb[i, :], emb[j, :]))))
-                                matrix[i][j] = dist
+                        # Create distance matrix
+                        matrix = np.sqrt(np.sum(np.square(np.subtract(np.expand_dims(emb, -1), emb.T)), axis=1))
 
                         # Instantiate the cluster algorithm, eps = the min distance to cluster
                         db = DBSCAN(eps=args.cluster_threshold, min_samples=args.min_cluster_size, metric='precomputed')

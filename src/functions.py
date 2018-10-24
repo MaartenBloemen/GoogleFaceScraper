@@ -27,6 +27,8 @@ import time
 import numpy as np
 from bs4 import BeautifulSoup
 
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+
 
 class GoogleFunctions:
     def __init__(self):
@@ -39,7 +41,7 @@ class GoogleFunctions:
         try:
             req = requests.get(url).content
             arr = np.asarray(bytearray(req), dtype=np.uint8)
-            img = cv2.imdecode(arr, -1)
+            img = cv2.imdecode(arr, cv2.IMREAD_UNCHANGED)
             return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         except:
             return None
@@ -50,7 +52,7 @@ class GoogleFunctions:
         url = 'https://www.google.com/search?q={}&source=lnms&tbm=isch&safe={}'.format(query, safe_mode)
         print(url)
         header = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+            'User-Agent': USER_AGENT
         }
         soup = self._get_soup(url, header)
 
@@ -92,7 +94,7 @@ class ImdbFunctions:
             start = 1 + (i * self.CELEBS_PER_PAGE)
             url = 'http://www.imdb.com/search/name?gender=male,female&start={}&ref_=rlm'.format(start)
             header = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+                'User-Agent': USER_AGENT
             }
             soup = self._get_soup(url, header)
 
